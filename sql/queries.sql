@@ -15,6 +15,11 @@ having count(numero) > (
 );
 
 -- c) Quais utilizadores cujos alugáveis foram fiscalizados sempre pelo mesmo fiscal?
+select A.nif
+from aluga A, fiscaliza F
+where A.morada = F.morada and A.codigo = F.codigo
+group by A.nif
+having count(distinct F.id) = 1;
 
 -- d) Qual o montante total realizado (pago) por cada espaço durante o ano de 2016?
 -- Assuma que a tarifa indicada na oferta é diária. Deve considerar os casos em que o
