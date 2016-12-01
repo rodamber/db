@@ -3,6 +3,7 @@ insert into edificio values ('FEUP');
 insert into edificio values ('Catolica');
 insert into edificio values ('ISEL');
 
+
 -- Senhorios
 insert into user values ('123456719', 'Jorge Poeta', '992323123');
 insert into user values ('113056729', 'António Martins', '992333123');
