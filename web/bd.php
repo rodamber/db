@@ -4,6 +4,8 @@
 
     <center><h1>Projecto de Bases de Dados</h1></center>
     <p><center><h1>Grupo 67</h1></center></p>
+    <p><center><h1>Professor Gabriel Pestana</h1></center></p>
+    <p><center><h1>Turno: Quinta-feira 12h30</h1></center></p>
     
     <p>User (example)</p>
 
