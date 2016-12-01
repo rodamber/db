@@ -1,8 +1,13 @@
 -- a) Quais os espaços com postos que nunca foram alugados?
 
+select distinct E.morada, E.codigo
+from espaco E, posto P left join aluga A
+on P.morada = A.morada and P.codigo = A.codigo
+where E.codigo = P.codigo_espaco and A.morada is null;
 
 -- b) Quais edifícios com um número de reservas superior à média?
-select morada
+
+select distinct morada
 from aluga
 group by morada
 having count(numero) > (
@@ -15,7 +20,8 @@ having count(numero) > (
 );
 
 -- c) Quais utilizadores cujos alugáveis foram fiscalizados sempre pelo mesmo fiscal?
-select A.nif
+
+select distinct A.nif
 from aluga A, fiscaliza F
 where A.morada = F.morada and A.codigo = F.codigo
 group by A.nif
