@@ -2,7 +2,7 @@
 <html>
 <body>
 
-    <center><h1>Adicionar Espaço</h1></center>
+    <center><h1>Remover Posto de Trabalho</h1></center>
 
 
    
@@ -11,6 +11,9 @@
     
     $morada=$_REQUEST['morada'];
     $codigo=$_REQUEST['codigo'];
+    $codigo_espaco=$_REQUEST['codigo_espaco'];
+    $foto=$_REQUEST['foto'];
+    
 try
  {
      $host = "db.ist.utl.pt";
@@ -24,16 +27,14 @@ try
     
     
     
-    $sql="insert into edificio (morada) values('$morada');";
-    $sql.="insert into alugavel (morada, codigo) values('$morada', '$codigo');";
-    $sql.="insert into espaco (morada, codigo) values('$morada', '$codigo');";
+     $sql="delete from posto where morada='$morada' and codigo='$codigo' and codigo_espaco='$codigo_espaco';";
+    $sql.="delete from alugavel where morada='$morada' and codigo='$codigo' and foto='$foto';";
     
-    
-    
-    echo("O espaço com a morada $morada e com o código $codigo foi adicionada com sucesso");
+ 
+    echo("A morada $morada foi removida com sucesso");
 
             
-    $db-> query($sql);
+    $db->query($sql);
     
      $db = null;
      }
@@ -44,9 +45,13 @@ try
 
     
 ?>
+    
+    
+    
+    
 <br>
-     <?php
-        $link_address1 = 'bd.php';
+<?php
+    $link_address1 = 'bd.php';
     echo "<a href='$link_address1'>Voltar</a>";
 ?>
 

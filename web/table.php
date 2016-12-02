@@ -5,19 +5,12 @@
     <center><h1>Total Realizado para cada Espaço num Edifício</h1></center>
 
 
-   <h3> <?=$_REQUEST['morada']?>  <?=$_REQUEST['codigo']?> </h3>
- <form action="table.php" method="post">
- <p><input type="hidden" name="morada"
-value="<?=$_REQUEST['morada']?>"/></p>
- <p>Morada: <input type="text" name="morada"/></p>     
- <p><input type="submit" value="Submit"/></p>
- </form>
    
-    
     
 <?php
     
-    $morada=$_REQUEST['morada'];
+     $morada=$_REQUEST['morada'];
+    
 try
  {
      $host = "db.ist.utl.pt";
@@ -28,6 +21,7 @@ try
      $db = new PDO("mysql:host=$host;dbname=$dbname", $user, $password);
      $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+    
     $sql="SELECT morada, codigo, SUM(montante)
                 FROM (
    
@@ -53,9 +47,27 @@ GROUP BY morada, codigo;
    
    ";
     
+    
+    
     $result = $db->query($sql);
+    
+    echo("Tabela correspondente ao edificio com a morada $morada<br>");
 
+            
+    
+     echo("<table border=\"0\" cellspacing=\"5\">\n");
+ foreach($result as $row)
+ {
+ echo("<tr>\n");
+ echo("<td>{$row['morada']}</td>\n");
+ echo("<td>{$row['codigo']}</td>\n");
+ echo("<td>{$row['SUM(montante)']}</td>\n");
 
+ echo("</tr>\n");
+ }
+ echo("</table>\n");
+    
+    
     
      $db = null;
      }
@@ -64,16 +76,13 @@ GROUP BY morada, codigo;
      echo("<p>ERROR: {$e->getMessage()}</p>");
      }
 
-
+    
 ?>
-    
-    
-    <?php
+<br>
+     <?php
         $link_address1 = 'bd.php';
     echo "<a href='$link_address1'>Voltar</a>";
 ?>
-   
-    
 
 </body>
 </html>

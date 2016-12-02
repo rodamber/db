@@ -2,15 +2,15 @@
 <html>
 <body>
 
-    <center><h1>Adicionar Espaço</h1></center>
+    <center><h1>Pagar Reserva</h1></center>
 
 
    
     
 <?php
     
-    $morada=$_REQUEST['morada'];
-    $codigo=$_REQUEST['codigo'];
+    $numero=$_REQUEST['numero'];
+    
 try
  {
      $host = "db.ist.utl.pt";
@@ -22,15 +22,12 @@ try
      $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     
-    
-    
-    $sql="insert into edificio (morada) values('$morada');";
-    $sql.="insert into alugavel (morada, codigo) values('$morada', '$codigo');";
-    $sql.="insert into espaco (morada, codigo) values('$morada', '$codigo');";
+    $sql="insert into paga (numero) values('$numero');";
     
     
     
-    echo("O espaço com a morada $morada e com o código $codigo foi adicionada com sucesso");
+    
+    echo("A reserva com o número $numero foi paga com sucesso");
 
             
     $db-> query($sql);

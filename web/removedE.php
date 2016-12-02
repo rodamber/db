@@ -2,7 +2,7 @@
 <html>
 <body>
 
-    <center><h1>Adicionar Espaço</h1></center>
+    <center><h1>Remover Espaço</h1></center>
 
 
    
@@ -11,6 +11,7 @@
     
     $morada=$_REQUEST['morada'];
     $codigo=$_REQUEST['codigo'];
+    
 try
  {
      $host = "db.ist.utl.pt";
@@ -22,18 +23,14 @@ try
      $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     
+    $sql="delete from alugavel where morada='$morada' and codigo='$codigo');";
+    $sql.="delete from espaco  where morada='$morada' and codigo='$codigo');";
     
-    
-    $sql="insert into edificio (morada) values('$morada');";
-    $sql.="insert into alugavel (morada, codigo) values('$morada', '$codigo');";
-    $sql.="insert into espaco (morada, codigo) values('$morada', '$codigo');";
-    
-    
-    
-    echo("O espaço com a morada $morada e com o código $codigo foi adicionada com sucesso");
+ 
+    echo("O espaço foi removido com sucesso");
 
             
-    $db-> query($sql);
+    $db->query($sql);
     
      $db = null;
      }
@@ -44,9 +41,13 @@ try
 
     
 ?>
+    
+    
+    
+    
 <br>
-     <?php
-        $link_address1 = 'bd.php';
+<?php
+    $link_address1 = 'bd.php';
     echo "<a href='$link_address1'>Voltar</a>";
 ?>
 

@@ -2,15 +2,18 @@
 <html>
 <body>
 
-    <center><h1>Adicionar Espaço</h1></center>
+    <center><h1>Criar Reserva sobre Oferta</h1></center>
 
 
    
     
 <?php
     
+    $oferta=$_REQUEST['oferta'];
     $morada=$_REQUEST['morada'];
     $codigo=$_REQUEST['codigo'];
+    
+    
 try
  {
      $host = "db.ist.utl.pt";
@@ -24,9 +27,8 @@ try
     
     
     
-    $sql="insert into edificio (morada) values('$morada');";
-    $sql.="insert into alugavel (morada, codigo) values('$morada', '$codigo');";
-    $sql.="insert into espaco (morada, codigo) values('$morada', '$codigo');";
+    $sql="insert into espaco (morada, codigo) values('$morada', '$codigo');";
+    
     
     
     

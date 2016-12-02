@@ -58,7 +58,7 @@ try
     
     
      $link_address1 = 'addR.php';
-    echo "<a href='$link_address1'>Adicionar Oferta</a><br>";
+    echo "<a href='$link_address1'>Criar Oferta</a><br>";
     
     $link_address1 = 'remR.php';
     echo "<a href='$link_address1'>Remover Oferta</a><br><br>";
