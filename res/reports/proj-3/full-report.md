@@ -183,4 +183,4 @@ Delimiter ;
 # Desenvolvimento da Aplicação
 
 Para aceder à aplicação deve-se aceder ao site 
-<web.ist.utl.pt/ist178742/BD/bd.php>.
+[web.ist.utl.pt/ist178742/BD/bd.php]().
