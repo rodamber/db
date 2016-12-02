@@ -4,7 +4,7 @@ SELECT DISTINCT E.morada, E.codigo
 FROM espaco E, posto P
 WHERE E.morada = P.morada AND E.codigo = P.codigo_espaco
   AND NOT EXISTS (
-	SELECT *
+  SELECT *
     FROM posto P2, aluga A
     WHERE P2.morada = A.morada AND P2.codigo = A.codigo
       AND P.morada = P2.morada AND P.codigo = P2.codigo);
@@ -71,7 +71,7 @@ FROM espaco E, posto P
 WHERE E.morada = P.morada AND E.codigo = P.codigo_espaco
 GROUP BY E.morada, E.codigo
 HAVING COUNT(P.codigo) = (
-	SELECT COUNT(P2.codigo)
+  SELECT COUNT(P2.codigo)
     FROM posto P2, aluga A
     WHERE P2.morada = A.morada AND P2.codigo = A.codigo
       AND E.morada = P2.morada AND E.codigo = P2.codigo_espaco);
