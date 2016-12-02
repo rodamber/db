@@ -31,7 +31,7 @@ try
     $sql.="delete from alugavel where morada='$morada' and codigo='$codigo' and foto='$foto';";
     
  
-    echo("A morada $morada foi removida com sucesso");
+    echo("O posto com a morada $morada e com o código $codigo foi removido com sucesso.");
 
             
     $db->query($sql);

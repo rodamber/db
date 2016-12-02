@@ -32,7 +32,7 @@ try
     
     
     
-    echo("O posto com a morada $morada e com o código $codigo foi adicionada com sucesso");
+    echo("O posto com a morada $morada e com o código $codigo foi adicionado com sucesso.");
 
             
     $db-> query($sql);

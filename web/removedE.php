@@ -27,7 +27,7 @@ try
     $sql.="delete from espaco  where morada='$morada' and codigo='$codigo');";
     
  
-    echo("O espaço foi removido com sucesso");
+    echo("O espaço foi removido com sucesso.");
 
             
     $db->query($sql);

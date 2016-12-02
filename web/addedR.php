@@ -35,7 +35,7 @@ try
     
     
     
-    echo("A reserva numero $numero foi criada com sucesso");
+    echo("A oferta numero $numero foi criada com sucesso.");
 
             
     $db-> query($sql);

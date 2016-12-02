@@ -27,7 +27,7 @@ try
     $sql="delete from edificio where morada ='$morada';";
     
  
-    echo("A morada $morada foi removida com sucesso");
+    echo("A morada $morada foi removida com sucesso.");
 
             
     $db->query($sql);

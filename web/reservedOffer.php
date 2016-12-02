@@ -32,7 +32,7 @@ try
     
     
     
-    echo("O espaço com a morada $morada e com o código $codigo foi adicionada com sucesso");
+    echo("A reserva sobre a oferta foi criada com sucesso.");
 
             
     $db-> query($sql);

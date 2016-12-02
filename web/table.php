@@ -51,7 +51,7 @@ GROUP BY morada, codigo;
     
     $result = $db->query($sql);
     
-    echo("Tabela correspondente ao edificio com a morada $morada<br>");
+    echo("Tabela correspondente ao edificio com a morada $morada \n");
 
             
     

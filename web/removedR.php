@@ -2,7 +2,7 @@
 <html>
 <body>
 
-    <center><h1>Remover Reserva</h1></center>
+    <center><h1>Remover Oferta</h1></center>
 
 
    
@@ -33,7 +33,7 @@ try
     $sql.="delete from alugavel where morada='$morada' and codigo='$morada', '$codigo');";
     
  
-    echo("A reserva com o número $numRes foi removida com sucesso");
+    echo("A oferta com o número $numRes foi removida com sucesso.");
 
             
     $db->query($sql);

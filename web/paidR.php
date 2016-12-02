@@ -27,7 +27,7 @@ try
     
     
     
-    echo("A reserva com o número $numero foi paga com sucesso");
+    echo("A reserva com o número $numero foi paga com sucesso.");
 
             
     $db-> query($sql);

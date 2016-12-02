@@ -28,7 +28,7 @@ try
     
     
     
-    echo("A morada $morada foi adicionada com sucesso");
+    echo("A morada $morada foi adicionada com sucesso.");
 
             
     $db-> query($sql);
