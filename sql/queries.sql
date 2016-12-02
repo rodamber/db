@@ -4,10 +4,10 @@ SELECT DISTINCT E.morada, E.codigo
 FROM espaco E, posto P
 WHERE E.morada = P.morada AND E.codigo = P.codigo_espaco
   AND NOT EXISTS (
-  SELECT *
-    FROM posto P2, aluga A
-    WHERE P2.morada = A.morada AND P2.codigo = A.codigo
-      AND P.morada = P2.morada AND P.codigo = P2.codigo);
+    SELECT *
+      FROM posto P2, aluga A
+      WHERE P2.morada = A.morada AND P2.codigo = A.codigo
+        AND P.morada = P2.morada AND P.codigo = P2.codigo);
 
 -- b) Quais edifícios com um número de reservas superior à média?
 
