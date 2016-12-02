@@ -2,20 +2,16 @@
 <html>
 <body>
 
-    <center><h1>Adicionar Edifício</h1></center>
+    <center><h1>Adicionar Espaço</h1></center>
 
 
-   <h3> <?=$_REQUEST['account_number']?></h3>
- <form action="addedB.php" method="post">
- <p><input type="hidden" name="morada"
-value="<?=$_REQUEST['morada']?>"/></p>
- <p>Morada: <input type="text" name="morada"/></p>
- <p><input type="submit" value="Submit"/></p>
- </form>
+   
     
 <?php
     
-     $morada=$_REQUEST['morada'];
+    $morada=$_REQUEST['morada'];
+    $codigo=$_REQUEST['codigo'];
+    
 try
  {
      $host = "db.ist.utl.pt";
@@ -26,8 +22,18 @@ try
      $db = new PDO("mysql:host=$host;dbname=$dbname", $user, $password);
      $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-     $sql="insert into edificio values('$morada');";
     
+    
+    
+    $sql="insert into espaco (morada, codigo) values('$morada', '$codigo');";
+    
+    
+    
+    
+    echo("O espaço com a morada $morada e com o código $codigo foi adicionada com sucesso");
+
+            
+    $db-> query($sql);
     
      $db = null;
      }
@@ -36,16 +42,13 @@ try
      echo("<p>ERROR: {$e->getMessage()}</p>");
      }
 
-
+    
 ?>
-    
-    
-    <?php
+<br>
+     <?php
         $link_address1 = 'bd.php';
     echo "<a href='$link_address1'>Voltar</a>";
 ?>
-   
-    
 
 </body>
 </html>

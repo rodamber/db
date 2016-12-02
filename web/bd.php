@@ -7,10 +7,6 @@
     <p><center><h1><font size="3">Turno: Quinta-feira 12h30</font></h1></center></p>
     
     
-    
-    
-    
-    
     <p>Opções de manipulação da Base de Dados</p>
 
 
