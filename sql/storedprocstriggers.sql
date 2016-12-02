@@ -25,3 +25,23 @@ Delimiter ;
 	
 
 -- b) RI-2: "A data de pagamento de uma reserva paga tem de ser superior ao timestamp do último estado dessa reserva"
+
+
+DROP TRIGGER IF EXISTS verifica_pagamento;
+
+Delimiter //
+
+CREATE TRIGGER verifica_pagamento BEFORE INSERT ON paga
+FOR EACH ROW
+BEGIN
+    IF (SELECT COUNT(*)
+        FROM estado E
+        WHERE NEW.numero = E.numero
+          AND NEW.data <= E.time_stamp
+        ) != 0
+    THEN CALL error;
+    END IF;
+
+END //
+
+Delimiter ;
