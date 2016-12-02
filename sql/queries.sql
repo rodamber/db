@@ -61,3 +61,15 @@ group by morada, codigo;
 -- e) Quais os espaços de trabalho cujos postos nele contidos foram todos
 -- alugados? (Por alugado entende-se um posto de trabalho que tenha pelo menos
 -- uma oferta aceite, independentemente das suas datas.)
+
+select morada, codigo
+from espaco
+where (morada, codigo) not in 
+   (select distinct morada, codigo_espaco as codigo
+    from posto as p
+	where (p.morada, p.codigo) not in 
+	   (select morada, codigo
+        from posto natural join aluga natural join estado
+        where estado.estado = 'Aceite'
+	   )
+   ) ;
