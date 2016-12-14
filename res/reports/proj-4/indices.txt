@@ -1,0 +1,19 @@
+Índices:
+
+1)	
+SELECT A.nif
+FROM arrenda A
+	INNER JOIN fiscaliza F
+	ON A.morada = F.morada
+	AND A.codigo = F.codigo
+GROUP BY A.nif
+HAVING COUNT(DISTINCT F.id) = 1;
+
+Caso a condição "A.morada = F.morada and A.codigo = F.codigo" seja pouco selectiva idealmente deveria-se ter um índice agrupado composto da tabela arrenda sobre os atributos <morada, codigo, nif>.
+Caso esta condição seja muito selectiva deveria-se ter um indice agrupado composto sobre os atributos <morada, codigo>.
+Visto que os atributos morada e código são chaves primarias da tabela arrenda, esta já se encontra indexada em relação a estes dois atributos. Sendo assim não é vantajoso alterar estes índices no segundo caso, ou seja, quando se verifique que a condição "A.morada = F.morada and A.codigo = F.codigo" seja muito seletiva.
+Se for verificado o primeiro caso, ou seja, caso a condição "A.morada = F.morada and A.codigo = F.codigo" seja pouco seletiva, o desempenho da query pode ser melhorado com a criação do seguinte índice em MySQL:
+
+CREATE UNIQUE INDEX arrenda_index ON arrenda (morada, codigo, nif);
+
+Analisando o plano de execução desta query observa-se que a tabela arrenda utilizou os índices primários <morada, codigo> sendo estes do tipo B+tree.  /* A tabela fiscaliza não utilizou índices visto que, nesta query, há a necessidade de varrer todos os elementos desta tabela. <--? por causa do inner join. */
