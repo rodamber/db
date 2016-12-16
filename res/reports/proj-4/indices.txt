@@ -9,20 +9,25 @@ FROM arrenda A
 GROUP BY A.nif
 HAVING COUNT(DISTINCT F.id) = 1;
 
-Caso a condição "A.morada = F.morada and A.codigo = F.codigo" seja pouco selectiva idealmente deveria-se ter um índice agrupado composto da tabela arrenda sobre os atributos <morada, codigo, nif>.
-Caso esta condição seja muito selectiva deveria-se ter um indice agrupado composto sobre os atributos <morada, codigo>.
-Visto que os atributos morada e código são chaves primarias da tabela arrenda, esta já se encontra indexada em relação a estes dois atributos. Sendo assim não é vantajoso alterar estes índices no segundo caso, ou seja, quando se verifique que a condição "A.morada = F.morada and A.codigo = F.codigo" seja muito seletiva.
-Se for verificado o primeiro caso, ou seja, caso a condição "A.morada = F.morada and A.codigo = F.codigo" seja pouco seletiva, o desempenho da query pode ser melhorado com a criação do seguinte índice em MySQL:
+Caso a condição "A.morada = F.morada and A.codigo = F.codigo" seja pouco
+selectiva idealmente deveria-se ter um índice agrupado composto da tabela
+arrenda sobre os atributos <morada, codigo, nif>. Caso esta condição seja muito
+selectiva deveria-se ter um indice agrupado composto sobre os atributos <morada,
+codigo>. Visto que os atributos morada e código são chaves primarias da tabela
+arrenda, esta já se encontra indexada em relação a estes dois atributos. Sendo
+assim não é vantajoso alterar estes índices no segundo caso, ou seja, quando se
+verifique que a condição "A.morada = F.morada and A.codigo = F.codigo" seja
+muito seletiva. Se for verificado o primeiro caso, ou seja, caso a condição
+"A.morada = F.morada and A.codigo = F.codigo" seja pouco seletiva, o desempenho
+da query pode ser melhorado com a criação do seguinte índice em MySQL:
 
-/*é necessário fazer drop do index actual?*/
 CREATE UNIQUE INDEX arrenda_index ON arrenda (morada, codigo, nif);
 
-Analisando o plano de execução desta query observa-se que a tabela arrenda utilizou os índices primários <morada, codigo> sendo estes do tipo B+tree.  /* A tabela fiscaliza não utilizou índices visto que, nesta query, há a necessidade de varrer todos os elementos desta tabela. <--? por causa do inner join. */
-
-/*haverá forma de evitar o file sort? */
-
+Analisando o plano de execução desta query observa-se que a tabela arrenda
+utilizou os índices primários <morada, codigo> sendo estes do tipo B+tree.
 
 2)
+
 SELECT DISTINCT P.morada, P.codigo_espaco
 FROM posto P
 WHERE (P.morada, P.codigo_espaco) NOT IN (
@@ -32,11 +37,16 @@ WHERE (P.morada, P.codigo_espaco) NOT IN (
 		NATURAL JOIN estado E
 	WHERE E.estado = 'aceite');
 
-/*será necessario?*/ Visto que os joins "posto P NATURAL JOIN aluga A NATURAL JOIN estado E" reunem as tabelas apenas com a atributos chave primaria, estes já se encontram indexados.
-Para melhorar o desempenho pode ser criado um índice agrupado composto na tabela estado sobre os atributos <numero, estado> caso a condição "E.estado = 'aceite'" seja pouco seletiva. Para criar este índice em MySQL usa-se:
+Visto que os joins "posto P NATURAL JOIN aluga A NATURAL JOIN estado E" reunem
+as tabelas apenas com a atributos chave primaria, estes já se encontram
+indexados. Para melhorar o desempenho pode ser criado um índice agrupado
+composto na tabela estado sobre os atributos <numero, estado> caso a condição
+"E.estado = 'aceite'" seja pouco seletiva. Para criar este índice em MySQL
+usa-se:
 
 CREATE INDEX estado_index ON estado (numero,estado);
 
-/*será necessário indexar a tabela gerada pela sub-query? */
-
-Ao analisar o plano de execução desta query pode-se constatar que todas as tabelas utilizadas estão a ser acedidas com recurso a índices. Também se observa que na query principal são utilizados os índices da tabela gerada pela sub-query.
+Ao analisar o plano de execução desta query pode-se constatar que todas as
+tabelas utilizadas estão a ser acedidas com recurso a índices. Também se observa
+que na query principal são utilizados os índices da tabela gerada pela
+sub-query.

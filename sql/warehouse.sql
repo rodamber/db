@@ -4,9 +4,11 @@ drop table if exists d_local;
 drop table if exists d_tempo;
 drop table if exists d_data;
 
-/*Data warehouse*/
+-- Data Warehouse
 
-/*Criacao das tabela f_reserva, d_user, d_local, d_tempo, d_data*/
+--------------------------------------------------------------------------------
+-- Dimensoes
+
 CREATE TABLE IF NOT EXISTS d_user(
 	userid INT NOT NULL AUTO_INCREMENT,
 	nif VARCHAR(9) NOT NULL,
@@ -35,7 +37,10 @@ CREATE TABLE IF NOT EXISTS d_data(
 	semestre INT NOT NULL,
 	ano INT NOT NULL,
 	PRIMARY KEY (dataid));
-	
+
+--------------------------------------------------------------------------------
+-- Factos
+
 CREATE TABLE IF NOT EXISTS f_reserva (
 	userid INT NOT NULL,
 	localid INT NOT NULL,
@@ -50,7 +55,8 @@ CREATE TABLE IF NOT EXISTS f_reserva (
 	FOREIGN KEY (dataid) REFERENCES d_data (dataid) ON DELETE CASCADE ON UPDATE CASCADE);
 
 
-/*Populate das tabelas estaticas d_tempo e d_data*/
+--------------------------------------------------------------------------------
+-- Populate das tabelas estaticas d_tempo e d_data
 
 delimiter //
 
