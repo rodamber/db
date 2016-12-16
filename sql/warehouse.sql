@@ -41,6 +41,8 @@ CREATE TABLE IF NOT EXISTS f_reserva (
 	localid INT NOT NULL,
 	tempoid INT NOT NULL,
 	dataid INT NOT NULL,
+	montante_pago INT NOT NULL,
+	duracao_dias INT NOT NULL,
 	PRIMARY KEY (userid,localid,tempoid,dataid),
 	FOREIGN KEY (userid) REFERENCES d_user (userid) ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (localid) REFERENCES d_local (localid) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -100,3 +102,4 @@ delimiter ;
 
 CALL load_tempo_dim;
 CALL load_data_dim;
+
